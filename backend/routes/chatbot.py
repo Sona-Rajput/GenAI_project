@@ -15,7 +15,7 @@ from pydantic_ai import Agent, RunContext
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 from dotenv import load_dotenv
-
+from pydantic_ai.models.groq import GroqModel
 load_dotenv()
 
 router = APIRouter(prefix="/chat", tags=["Chatbot"])
@@ -40,10 +40,11 @@ class StoreDeps(BaseModel):
 # We detect product queries from tool usage, NOT
 # by forcing a rigid output schema on the LLM.
 # ──────────────────────────────────────────────
+model = GroqModel("openai/gpt-oss-120b")
 
 
 agent = Agent(
-    "groq:qwen/qwen3-32b",
+    model=model,
     deps_type=StoreDeps, ## they way it will output
     system_prompt=(
         "You are a friendly shopping assistant for ClothStore — an online clothing store. "

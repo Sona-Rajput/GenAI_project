@@ -1,6 +1,7 @@
 """
 Database configuration and MongoDB connection setup.
 """
+import certifi
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os   
@@ -12,7 +13,7 @@ load_dotenv(dotenv_path=os.path.join(os.getcwd(), ".env"))
 MONGO_URI = os.getenv("MONGO_URI")
 
 # Initialize MongoDB client and database
-client = MongoClient(MONGO_URI)
+client = MongoClient(MONGO_URI,tlsCAFile=certifi.where())
 db = client["ecom_db"]
 
 # collections 
