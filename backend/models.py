@@ -5,7 +5,7 @@ Pydantic models for data validation and serialization.
 from pydantic import BaseModel
 from typing import Optional, List
 
-## type hiniting
+## type hiniting 
 
 class Product(BaseModel):
     """Product model for the store inventory."""
